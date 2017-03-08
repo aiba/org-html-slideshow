@@ -14,8 +14,12 @@
             [goog.Timer :as Timer]
             [goog.Uri :as Uri]
             [goog.window :as window]
-            [one.dispatch :as dispatch]
-            [domina :as d]))
+            [org-html-slideshow.dispatch :as dispatch]
+            [org-html-slideshow.domina :as d]))
+
+(declare nearest-containing-div)
+(declare show-presenter-slides)
+
 
 ;;; GLOBAL STATE
 
@@ -238,8 +242,7 @@
 (defn remove-nested-sections [slide-div-elem]
   (let [div (. slide-div-elem (cloneNode true))]
     (doseq [elem (dom-tags "div" nil div)]
-      (when (and (not )
-                 (some #(classes/has elem (str "outline-" %)) (range 1 9)))
+      (when (some #(classes/has elem (str "outline-" %)) (range 1 9))
         (remove-elem elem)))
     div))
 
@@ -340,7 +343,7 @@
 
 (defn go-to-top []
   (set-location-fragment "top")
-  (. window (scrollTo 0 0)))
+  (. js/window (scrollTo 0 0)))
 
 
 ;;; KEYBOARD
@@ -356,7 +359,7 @@
    goog.events.KeyCodes.END :show-last-slide
 
    goog.events.KeyCodes.SPACE :show-next-slide
-   goog.events.KeyCodes.ENTER :show-next-slide        
+   goog.events.KeyCodes.ENTER :show-next-slide
    goog.events.KeyCodes.MAC_ENTER :show-next-slide
    goog.events.KeyCodes.RIGHT :show-next-slide
    goog.events.KeyCodes.DOWN :show-next-slide
@@ -555,6 +558,7 @@
 ;;; MAIN
 
 (defn main []
+  (info "main")
   (.setCapturing (goog.debug.Console.) true)
   (info "Application started")
   (info "Preparing document")

@@ -1,6 +1,6 @@
-/lib/jars
-/lib/closure
-/out/development
+/out
 *~
 #*
 /.lein*
+/target
+*.DS_Store

@@ -1,9 +1,7 @@
-#+TITLE: Example Presentation
-#+AUTHOR: Stuart Sierra
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <p>Type <strong>T</strong> to begin the slide show.</p>
-#+END_HTML
+#+END_EXPORT
 
 * Org-HTML-Slideshow                                                  :slide:
 
@@ -47,7 +45,7 @@ This slide is a *level-3* Org-Mode heading, inside the previous one.
 
 - Slides can have presenter notes
 - Add a sub-heading with the =:notes:= tag
-  
+
 ** A Slide with Notes                                                 :slide:
 
 - This slide has notes
@@ -77,8 +75,8 @@ Use =begin_src/end_src= blocks to include source code.
 
 ** Syntax Highlighting with CSS Classes                               :slide:
 
-- Set the Emacs variable 
-  - =org-export-htmlize-output-type= 
+- Set the Emacs variable
+  - =org-export-htmlize-output-type=
   - to the symbol =css=
   - (Does not work as a buffer-local variable)
 - Htmlize.el will add SPAN tags with CSS classes
@@ -145,9 +143,9 @@ Sometimes it's safest to add an "empty" heading at the end of your document to m
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="src/css/projection.css" media="projection" />
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="src/css/presenter.css" media="presenter" />
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <script type="text/javascript" src="production/org-html-slideshow.js"></script>
-#+END_HTML
+#+END_EXPORT
 
 # Local Variables:
 # org-html-head-include-default-style: nil

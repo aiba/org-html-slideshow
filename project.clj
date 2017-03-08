@@ -3,8 +3,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-1896"]]
   :plugins [[lein-cljsbuild "0.3.3"]]
-  :library-path "lib/jars"
-  :source-paths ["lib/domina/src/cljs" "lib/one/src/lib/cljs"]
+  :source-paths []
   :cljsbuild {:builds
               {:development
                {:source-paths ["src/cljs"]
@@ -14,7 +13,7 @@
                            :pretty-print true}}
                :production
                {:source-paths ["src/cljs"]
-                :compiler {:output-to "production/org-html-slideshow.js"
-                           :output-dir "production"
+                :compiler {:output-to "out/production/org-html-slideshow.js"
+                           :output-dir "out/production"
                            :optimizations :advanced
                            :pretty-print false}}}})
