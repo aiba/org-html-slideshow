@@ -265,8 +265,12 @@
   (some (fn [slide] (when (= id (:id slide)) slide)) @slides))
 
 (defn find-slide-after [id]
-  (second (drop-while #(pos? (string/numerateCompare id (:id %)))
-                      @slides)))
+  ;; Assumption: @slides is in order
+  (loop [[s & r] @slides]
+    (when s
+      (if (= (:id s) id)
+        (first r)
+        (recur r)))))
 
 (defn current-slide []
   (let [fragment-id (location-fragment)
