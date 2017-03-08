@@ -373,7 +373,8 @@
    goog.events.KeyCodes.LEFT :show-prev-slide
    ;;goog.events.KeyCodes.UP :show-prev-slide
    ;;goog.events.KeyCodes.PAGE_UP :show-prev-slide
-   ;;goog.events.KeyCodes.P :show-prev-slide
+
+   goog.events.KeyCodes.P :playpause-video
    })
 
 (defn handle-key [event]
@@ -491,12 +492,12 @@
   (if-let [win (get-presenter-window)]
     (. win (focus))
     (do (reset! presenter-window
-             (window/open "" (. {:target "PRESENTERDISPLAY"
-                                 :toolbar false
-                                 :location false
-                                 :statusbar false
-                                 :menubar false}
-                                -strobj)))
+                (window/open "" (. {:target "PRESENTERDISPLAY"
+                                    :toolbar false
+                                    :location false
+                                    :statusbar false
+                                    :menubar false}
+                                   -strobj)))
         (let [doc (. @presenter-window -document)]
           (. doc (write presenter-display-html))
           (add-stylesheets (get @stylesheet-urls "common") doc)
@@ -509,10 +510,18 @@
         (show-presenter-slides)
         (update-presenter-clock))))
 
+(defn playpause-video []
+  (let [elt (d/by-id "current-slide")
+        vtag (first (.getElementsByTagName elt "video"))
+        paused? (boolean (aget vtag "paused"))]
+    (if paused?
+      (.play vtag)
+      (.pause vtag))))
 
 ;;; EVENTS
 
 (defn install-event-handlers []
+  (dispatch/react-to #{:playpause-video} (fn [id _] (playpause-video)))
   (dispatch/react-to #{:show-next-slide} (fn [id _] (show-next-slide)))
   (dispatch/react-to #{:show-prev-slide} (fn [id _] (show-prev-slide)))
   (dispatch/react-to #{:show-first-slide} (fn [id _] (show-first-slide)))
