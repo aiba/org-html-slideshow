@@ -144,7 +144,7 @@ Sometimes it's safest to add an "empty" heading at the end of your document to m
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="src/css/presenter.css" media="presenter" />
 
 #+BEGIN_EXPORT HTML
-<script type="text/javascript" src="production/org-html-slideshow.js"></script>
+<script type="text/javascript" src="out/development/org-html-slideshow.js"></script>
 #+END_EXPORT
 
 # Local Variables:
