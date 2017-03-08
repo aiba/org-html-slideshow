@@ -134,6 +134,29 @@ See [[http://orgmode.org/manual/Comment-lines.html][Comment lines]] and [[http:/
 
 Sometimes it's safest to add an "empty" heading at the end of your document to make sure the stylesheets and JavaScript are included.
 
+** Slide with <video> tag                                             :slide:
+#+BEGIN_EXPORT HTML
+<video width="880" preload="auto" controls>
+  <source src="video.mp4">
+  Browser doesn't support HTML5 video.
+</video>
+#+END_export
+
+** Slide with <audio> tag                                             :slide:
+#+BEGIN_EXPORT HTML
+<audio preload="auto" controls>
+  <source src="audio.mp3">
+  Browser doesn't support HTML5 audio.
+</audio>
+#+END_export
+
+
+** Slide with youtube video                                           :slide:
+
+#+BEGIN_EXPORT HTML
+<iframe class="ytvid" width="560" height="315" src="https://www.youtube.com/embed/kpArcjAwfSU" frameborder="0" allowfullscreen></iframe>
+#+END_export
+
 #+OPTIONS: num:nil toc:nil tags:t
 
 #+TAGS: slide(s)

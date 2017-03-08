@@ -512,11 +512,26 @@
 
 (defn playpause-video []
   (let [elt (d/by-id "current-slide")
-        vtag (first (.getElementsByTagName elt "video"))
-        paused? (boolean (aget vtag "paused"))]
-    (if paused?
-      (.play vtag)
-      (.pause vtag))))
+        mtag (or (first (.getElementsByTagName elt "video"))
+                 (first (.getElementsByTagName elt "audio")))
+        yt (first (.getElementsByClassName elt "ytvid"))]
+
+    (cond
+      ;; <video> or <audio> tags
+      mtag (let [paused? (boolean (aget mtag "paused"))]
+             (if paused?
+               (.play mtag)
+               (.pause mtag)))
+
+      ;; youtube iframe
+      yt (let [src (aget yt "src")
+               auto "?autoplay=1"
+               src' (if (string/endsWith src auto)
+                      (.replace src auto "")
+                      (str src auto))]
+           (aset yt "src" src'))
+
+      :else nil)))
 
 ;;; EVENTS
 
